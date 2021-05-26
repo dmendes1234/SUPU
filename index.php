@@ -4,11 +4,16 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (isset($_POST['addEvent'])) {
     $title = $_POST['title'];
+    $performer = $_POST['performer'];
+    $organizer = $_POST['organizer'];
     $location = $_POST['location'];
     $image = $_POST['image'];
     $date = $_POST['date'];
+    $cprice = $_POST['cprice'];
+    $aprice = $_POST['aprice'];
+    $seats = $_POST['seats'];
 
-    $query = mysqli_query($con, 'insert into events (Title, Location, Image, Date) values ("' . $title . '", "' . $location . '", "' . $image . '", "' . $date . '")');
+    $query = mysqli_query($con, 'insert into events (Title, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats) values ("' . $title . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '")');
 }
 
 ?>
@@ -132,18 +137,20 @@ if (isset($_POST['addEvent'])) {
     $ret = mysqli_query($con, "select * from events");
     while ($row = mysqli_fetch_array($ret)) {
     ?>
-        <div class="card">
-            <img src="<?php echo $row['Image']; ?>" alt="Error" style="width:100%">
-            <h1><?php echo $row['Title']; ?></h1>
-            <p class="event_title"><?php echo $row['Date']; ?></p>
-            <p><?php echo $row['Location']; ?></p>
-            <?php if ($row2['UserType'] == 'admin') { ?>
-                <hr>
-                <p><a href="edit-event.php?editid=<?php echo $row['ID']; ?>">Uredi</a></p>
-                <hr>
-                <p><a href="delete-event.php?editid=<?php echo $row['ID']; ?>">Obriši</a></p>
-            <?php } ?>
-        </div>
+        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
+            <div class="card">
+                <img src="<?php echo $row['Image']; ?>" alt="Error" style="width:100%">
+                <h1><?php echo $row['Title']; ?></h1>
+                <p class="event_title"><?php echo $row['Date']; ?></p>
+                <p><?php echo $row['Location']; ?></p>
+                <?php if ($row2['UserType'] == 'admin') { ?>
+                    <hr>
+                    <p><a href="edit-event.php?editid=<?php echo $row['ID']; ?>">Uredi</a></p>
+                    <hr>
+                    <p><a href="delete-event.php?editid=<?php echo $row['ID']; ?>">Obriši</a></p>
+                <?php } ?>
+            </div>
+        </a>
     <?php
     }
     ?>
