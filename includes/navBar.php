@@ -6,10 +6,19 @@ $row = mysqli_fetch_array($ret)
 
 <div id="navBar">
     <a href="index.php">Početna</a>
-    <a href="#">Link</a>
+
+    <?php
+     if ($row['UserType'] == 'admin') //samo admin može pregledavati narudžbe
+     {  
+    ?>
+    <a href="orders.php">Narudžbe</a>
+    <?php 
+     } 
+    ?>
     <a href="#">Link</a>
 
     <?php
+
     //želimo samo da s početne stranice možemo dodavati nove događaje
     $url = $_SERVER["REQUEST_URI"]; 
     $pos = strrpos($url, "index.php"); 
