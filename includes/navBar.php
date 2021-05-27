@@ -13,9 +13,13 @@ $row = mysqli_fetch_array($ret)
     ?>
     <a href="orders.php">Narudžbe</a>
     <?php 
+     }
+     if (strlen($_SESSION['user_id'] > 0)){ 
+    ?>
+    <a href="my-tickets.php">Moje ulaznice</a>
+    <?php
      } 
     ?>
-    <a href="#">Link</a>
 
     <?php
 
@@ -33,6 +37,7 @@ $row = mysqli_fetch_array($ret)
     ?>
     <a href="logout.php" style="float:right">Odjava</a>
     <?php } else { ?>
+    <a href="register.php" style="float: right;">Registracija</a>
     <a href="login.php" style="float:right">Prijava</a>
     <?php } ?>
 </div>

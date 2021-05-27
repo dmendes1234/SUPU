@@ -43,7 +43,6 @@ if (isset($_POST['addEvent'])) {
     <?php
     include("includes/header.html");
     include("includes/navBar.php");
-    include("includes/addEvent.php");
     ?>
 
     <!-- Kartica događaja -->

@@ -12,6 +12,7 @@ $get_events = mysqli_query($con, "SELECT * FROM events");
 $row_event = mysqli_fetch_array($get_events);
 
 if (isset($_POST['buy'])) {
+    $event_title = $row_event['Title'];
     $logged_user = $row_user['UserName'];
     $noadult = $_POST['noadult'];
     $nochildren = $_POST['nochildren'];
@@ -24,7 +25,7 @@ if (isset($_POST['buy'])) {
     $ticketid = mt_rand(100000000, 999999999);
 
     if($updated_seats >= 0){
-    $query = mysqli_query($con, "INSERT INTO tickets (TicketID, NoChildren, NoAdult, ChildUnitPrice, AdultUnitPrice, User, BuyerName, BuyerSurname, BuyerAddress) VALUE ('$ticketid', '$nochildren', '$noadult', '$cprice', '$aprice', '$logged_user', '$buyer_name', '$buyer_surname', '$buyer_address')");
+    $query = mysqli_query($con, "INSERT INTO tickets (TicketID, NoChildren, NoAdult, ChildUnitPrice, AdultUnitPrice, User, BuyerName, BuyerSurname, BuyerAddress, EventTitle) VALUE ('$ticketid', '$nochildren', '$noadult', '$cprice', '$aprice', '$logged_user', '$buyer_name', '$buyer_surname', '$buyer_address', '$event_title')");
     $update_availableSeats = mysqli_query($con, "UPDATE events SET AvailableSeats = '$updated_seats' WHERE ID = '$event_id'");
     } else { '<script>alert("Broj ulaznica koje želite kupiti premašuje broj slobodnih mjesta!")</script>'; }
 

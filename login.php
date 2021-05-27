@@ -3,6 +3,13 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 
+if(isset($_SESSION['msg'])){
+    echo "<script type='text/javascript'>
+            alert('" . $_SESSION['msg'] . "');
+          </script>";
+    unset($_SESSION['msg']);
+}
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = md5($_POST['password']);
