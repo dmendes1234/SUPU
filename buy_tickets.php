@@ -23,9 +23,17 @@ if (isset($_POST['buy'])) {
     $buyer_surname = $_POST['buyer_surname'];
     $buyer_address = $_POST['buyer_address'];
     $ticketid = mt_rand(100000000, 999999999);
+    $promo_code = $_POST['promo_code'];
+
+    if ($row_event['PromoCode'] == $promo_code){
+        $promo_discount = $row_event['PromoDiscount'];
+    }
+    else{
+        $promo_discount = 0;
+    }
 
     if($updated_seats >= 0){
-    $query = mysqli_query($con, "INSERT INTO tickets (TicketID, NoChildren, NoAdult, ChildUnitPrice, AdultUnitPrice, User, BuyerName, BuyerSurname, BuyerAddress, EventTitle) VALUE ('$ticketid', '$nochildren', '$noadult', '$cprice', '$aprice', '$logged_user', '$buyer_name', '$buyer_surname', '$buyer_address', '$event_title')");
+    $query = mysqli_query($con, "INSERT INTO tickets (TicketID, NoChildren, NoAdult, ChildUnitPrice, AdultUnitPrice, User, BuyerName, BuyerSurname, BuyerAddress, EventTitle, PromoDiscount) VALUE ('$ticketid', '$nochildren', '$noadult', '$cprice', '$aprice', '$logged_user', '$buyer_name', '$buyer_surname', '$buyer_address', '$event_title', '$promo_discount')");
     $update_availableSeats = mysqli_query($con, "UPDATE events SET AvailableSeats = '$updated_seats' WHERE ID = '$event_id'");
     } else { '<script>alert("Broj ulaznica koje želite kupiti premašuje broj slobodnih mjesta!")</script>'; }
 
@@ -81,6 +89,10 @@ if (isset($_POST['buy'])) {
                 <label for="children">Djeca</label>
                 <input type="number" class="form-control" id="nochildren" name="nochildren"
                     placeholder="Broj ulaznica za djecu" value="">
+            </div>
+            <div class="form-group">
+                <label for="promo_code">Promo code</label>
+                <input type="text" class="form-control" name="promo_code" placeholder="Promo code (optional)" value="">
             </div>
             <hr>
             <h5>Podaci za dostavu</h5>

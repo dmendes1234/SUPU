@@ -85,6 +85,10 @@ if ($row_user['UserType'] == 'admin')
                     ulaznica</th>
                 <td style="padding-left: 10px; color:red">$<?php echo ($ta + $tc); ?></td>
             </tr>
+            <tr>
+                <th style="text-align: center;color: red;font-size: 20px; padding-left:100px" colspan="3">Cijena s popustom</th>
+                <td style="padding-left: 10px; color:red">$<?php echo (100-(($row['PromoDiscount']/($ta + $tc))*100)); ?></td>
+            </tr>
         </table>
         <p style="margin-top:1%; text-align:center">
             <i class="fa fa-print fa-2x" style="cursor: pointer;" OnClick="CallPrint(this.value)"></i>
