@@ -14,8 +14,10 @@ if (isset($_POST['submit'])) {
   $cprice = $_POST['cprice'];
   $aprice = $_POST['aprice'];
   $seats = $_POST['seats'];
+  $promo_code = $_POST['promo_code'];
+  $promo_discount = $_POST['promo_discount'];
 
-  $query = mysqli_query($con, "update events set Title='$title', Performer='$performer', Organizer='$organizer', Location='$location', Image='$image', Date='$date', TicketPriceChild='$cprice', TicketPriceAdult='$aprice', AvailableSeats='$seats' where ID='$event_id'");
+  $query = mysqli_query($con, "update events set Title='$title', Performer='$performer', Organizer='$organizer', Location='$location', Image='$image', Date='$date', TicketPriceChild='$cprice', TicketPriceAdult='$aprice', AvailableSeats='$seats', PromoCode='$promo_code', PromoDiscount='$promo_discount' where ID='$event_id'");
   if ($query) {
     echo '<script>
       alert("Podaci uspješno izmijenjeni");
@@ -99,6 +101,14 @@ if (isset($_POST['submit'])) {
       <div class="form-group">
         <label for="seats">Slobodna mjesta</label>
         <input type="number" class="form-control" id="seats" placeholder="Unesi broj slobodnih mjesta" name="seats" value="<?php echo $row['AvailableSeats'] ?>">
+      </div>
+      <div class="form-group">
+        <label for="promo_code">Promo code</label>
+        <input type="text" class="form-control" id="promo_code" placeholder="Unesi kod za popust ukoliko postoji" name="promo_code" value="<?php echo $row['PromoCode'] ?>">
+      </div>
+      <div class="form-group">
+        <label for="promo_discount">Promo popust</label>
+        <input type="number" class="form-control" id="promo_discount" placeholder="Unesi popust (%) koji se ostvaruje unosom promo koda" name="promo_discount" value="<?php echo $row['PromoDiscount'] ?>">
       </div>
 
       <button type="submit" name="submit" class="btn btn-primary">Update</button>

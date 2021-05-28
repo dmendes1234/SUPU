@@ -43,19 +43,13 @@ $user_id = $_SESSION['user_id'];
 $get_users = mysqli_query($con, "SELECT * FROM users WHERE ID = '$user_id'");
 $row_user = mysqli_fetch_array($get_users); 
 
-if ($row_user['UserType'] == 'admin')
-{
-        ?>
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
-        <a href="orders.php">Natrag</a>
-    </div>
-    <?php 
-}
 ?>
 
     <div id="print"
         style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
         <h4 class="header-title" style="color: blue">Identifikacijski broj ulaznice: <?php echo $row['TicketID']; ?>
+        </h4>
+        <h4 class="header-title" style="color: blue">Naziv događaja: <?php echo $row['EventTitle']; ?>
         </h4>
         <h5 class="header-title" style="color: blue">Datum narudžbe: <?php echo $row['PostingDate']; ?></h5>
         <table class="table table-striped" style="text-align: center;">
@@ -87,7 +81,7 @@ if ($row_user['UserType'] == 'admin')
             </tr>
             <tr>
                 <th style="text-align: center;color: red;font-size: 20px; padding-left:100px" colspan="3">Cijena s popustom</th>
-                <td style="padding-left: 10px; color:red">$<?php echo (100-(($row['PromoDiscount']/($ta + $tc))*100)); ?></td>
+                <td style="padding-left: 10px; color:red">$<?php echo (($ta + $tc) - (($row['PromoDiscount']/100)*($ta + $tc))); ?></td>
             </tr>
         </table>
         <p style="margin-top:1%; text-align:center">

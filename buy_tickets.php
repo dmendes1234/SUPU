@@ -8,7 +8,7 @@ $user_id = $_SESSION['user_id'];
 $get_users = mysqli_query($con, "SELECT * FROM users WHERE ID = '$user_id'");
 $row_user = mysqli_fetch_array($get_users);
 
-$get_events = mysqli_query($con, "SELECT * FROM events");
+$get_events = mysqli_query($con, "SELECT * FROM events WHERE ID = '$event_id'");
 $row_event = mysqli_fetch_array($get_events);
 
 if (isset($_POST['buy'])) {
@@ -112,7 +112,7 @@ if (isset($_POST['buy'])) {
                     placeholder="Unesite adresu za dostavu ulaznica" value="" required="true">
             </div>
             <?php
-        $ret = mysqli_query($con, "SELECT * FROM events");
+        $ret = mysqli_query($con, "SELECT * FROM events WHERE ID = '$event_id'");
         $row = mysqli_fetch_array($ret)
         ?>
             <input type="hidden" name="cprice" value="<?php echo $row['TicketPriceChild']; ?>">
