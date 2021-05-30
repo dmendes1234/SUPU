@@ -12,6 +12,7 @@ $row = mysqli_fetch_array($ret)
   <a href="view-category.php?event_category=Kazalište">Kazalište</a>
   <a href="view-category.php?event_category=Sport">Sport</a>
   <a href="view-category.php?event_category=Turizam">Turizam</a>
+  <a style="float: right;" href="test.php">Test</a>
   <?php
   if ($row > 0) {
   ?>
