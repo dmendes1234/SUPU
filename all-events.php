@@ -31,7 +31,7 @@ include('includes/dbconnection.php');
     ?>
 
     <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;"> 
-        <a href="index.php"><-- Nazad na preporučene događaje</a>
+        <a href="index.php"><-- Preporučeni događaji</a>
     </div>
 
     <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">

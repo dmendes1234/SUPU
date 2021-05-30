@@ -92,7 +92,7 @@ if (isset($_POST['buy'])) {
             </div>
             <div class="form-group">
                 <label for="promo_code">Promo code</label>
-                <input type="text" class="form-control" name="promo_code" placeholder="Promo code (optional)" value="">
+                <input type="text" class="form-control" name="promo_code" placeholder="Promo code (optional)">
             </div>
             <hr>
             <h5>Podaci za dostavu</h5>

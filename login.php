@@ -17,6 +17,7 @@ if (isset($_POST['login'])) {
     $ret = mysqli_fetch_array($query);
     if ($ret > 0) {
         $_SESSION['user_id'] = $ret['ID'];
+        $_SESSION['user_type'] = $ret['UserType'];
         $_SESSION['username'] = $username;
         header('location:index.php');
     } else {

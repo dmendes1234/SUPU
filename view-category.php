@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+
+$event_category = $_GET['event_category'];
 ?>
 
 <!DOCTYPE html>
@@ -30,31 +32,30 @@ include('includes/dbconnection.php');
     include("includes/navBar.php");
     ?>
 
-    <div style="margin-top:30px; margin-left: 25px; margin-left:50px; margin-right:40px;">
-        <h4>Preporučeni događaji:</h4>
-        <hr>
+    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
+        <a href="all-events.php" style="float:right; font-size:20px">Svi događaji -></a>
+        <h4><?php echo $event_category ?></h4>
     </div>
-
-    <!-- Kartica događaja 
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-    -->
 
     <?php
     $ret2 = mysqli_query($con, "select * from users where ID='$user_id'");
     $row2 = mysqli_fetch_array($ret2);
-    $ret = mysqli_query($con, "select * from events where Recommended='1'");
+
+    if($event_category == 'Glazba'){
+        $ret = mysqli_query($con, "select * from events where Category='Glazba'");
+    }
+    else if ($event_category == 'Film'){
+        $ret = mysqli_query($con, "select * from events where Category='Film'");
+    }
+    else if ($event_category == 'Kazalište'){
+        $ret = mysqli_query($con, "select * from events where Category='Kazalište'");
+    }
+    else if ($event_category == 'Sport'){
+        $ret = mysqli_query($con, "select * from events where Category='Sport'");
+    }
+    else if ($event_category == 'Turizam'){
+        $ret = mysqli_query($con, "select * from events where Category='Turizam'");
+    }
     while ($row = mysqli_fetch_array($ret)) {
     ?>
         <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">

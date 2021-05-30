@@ -9,6 +9,10 @@
     float: left;
 }
 
+.card img {
+    height: 310px;
+}
+
 .event_title {
     color: grey;
     font-size: 18px;

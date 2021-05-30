@@ -6,33 +6,13 @@ $row = mysqli_fetch_array($ret)
 
 <div class="navigation">
   <a href="index.php">Home</a>
+  <a href="all-events.php">Svi događaji</a>
+  <a href="view-category.php?event_category=Glazba">Glazba</a>
+  <a href="view-category.php?event_category=Film">Film</a>
+  <a href="view-category.php?event_category=Kazalište">Kazalište</a>
+  <a href="view-category.php?event_category=Sport">Sport</a>
+  <a href="view-category.php?event_category=Turizam">Turizam</a>
   <?php
-  if ($row['UserType'] == 'admin') //samo admin može pregledavati narudžbe
-  {
-  ?>
-    <a href="orders.php">Narudžbe</a>
-  <?php
-  }
-  if (strlen($_SESSION['user_id'] > 0)) {
-  ?>
-    <a href="my-tickets.php">Moje ulaznice</a>
-  <?php
-  }
-
-
-  //ako želimo da samo s početne stranice možemo dodavati nove događaje
-  //$url = $_SERVER["REQUEST_URI"]; 
-  //$pos = strrpos($url, "index.php"); 
-
-  //if ($pos == true) {
-  //<a href="add-event.php" title="Add new event"><i class="fa fa-plus"></i></a>}
-  ?>
-
-  <?php
-  if ($row['UserType'] == 'admin') { ?>
-    <a href="add-event.php" title="Add new event"><i class="fa fa-plus"></i></a>
-  <?php
-  }
   if ($row > 0) {
   ?>
     <div class="dropdown1">
@@ -40,6 +20,25 @@ $row = mysqli_fetch_array($ret)
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content1">
+        <?php
+        if ($row['UserType'] == 'admin') //samo admin može pregledavati narudžbe
+        {
+        ?>
+          <a href="orders.php">Narudžbe</a>
+        <?php
+        }
+        if (strlen($_SESSION['user_id'] > 0)) {
+        ?>
+          <a href="my-tickets.php">Moje ulaznice</a>
+        <?php
+        }
+        ?>
+        <?php
+        if ($row['UserType'] == 'admin') { ?>
+          <a href="add-event.php" title="Add new event">Novi događaj</a>
+        <?php
+        }
+        ?>
         <a href="logout.php">Odjava</a>
       </div>
     </div>

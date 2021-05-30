@@ -1,6 +1,8 @@
 .navigation {
     overflow: hidden;
     background-color: #333;
+    margin-left: 50px;
+    margin-right: 40px;
 }
 
 .navigation a {
@@ -10,14 +12,17 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    min-width: 100px;
 }
 
 .dropdown1 {
     float: right;
     overflow: hidden;
+    min-width: 160px;
 }
 
 .dropdown1 .dropbtn1 {
+    min-width: 160px;
     font-size: 16px;
     border: none;
     outline: none;
@@ -30,7 +35,7 @@
 
 .navigation a:hover,
 .dropdown1:hover .dropbtn1 {
-    background-color: red;
+    background-color: rgb(158, 46, 93);
 }
 
 .dropdown-content1 {

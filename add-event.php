@@ -3,28 +3,28 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 if (isset($_POST['add_event'])) {
-    $title = $_POST['title'];
-    $performer = $_POST['performer'];
-    $organizer = $_POST['organizer'];
-    $location = $_POST['location'];
-    $image = $_POST['image'];
-    $date = $_POST['date'];
-    $cprice = $_POST['cprice'];
-    $aprice = $_POST['aprice'];
-    $seats = $_POST['seats'];
-    $promo_code = $_POST['promo_code'];
-    $promo_discount = $_POST['promo_discount'];
+  $title = $_POST['title'];
+  $category = $_POST['category'];
+  $performer = $_POST['performer'];
+  $organizer = $_POST['organizer'];
+  $location = $_POST['location'];
+  $image = $_POST['image'];
+  $date = $_POST['date'];
+  $cprice = $_POST['cprice'];
+  $aprice = $_POST['aprice'];
+  $seats = $_POST['seats'];
+  $promo_code = $_POST['promo_code'];
+  $promo_discount = $_POST['promo_discount'];
 
-    if(isset($_POST['recommend_event'])){
-      $recommended = 1;
-    }
-    else{
-      $recommended = 0;
-    }
+  if (isset($_POST['recommend_event'])) {
+    $recommended = 1;
+  } else {
+    $recommended = 0;
+  }
 
-    $query = mysqli_query($con, 'insert into events (Title, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats, PromoCode, PromoDiscount, Recommended) values ("' . $title . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '", "' . $promo_code . '", "' . $promo_discount . '", "' . $recommended . '")');
-    $_SESSION['msg'] = "Događaj uspješno kreiran.";
-    header('location:index.php');
+  $query = mysqli_query($con, 'insert into events (Title, Category, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats, PromoCode, PromoDiscount, Recommended) values ("' . $title . '", "' . $category . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '", "' . $promo_code . '", "' . $promo_discount . '", "' . $recommended . '")');
+  $_SESSION['msg'] = "Događaj uspješno kreiran.";
+  header('location:index.php');
 }
 ?>
 
@@ -35,16 +35,31 @@ if (isset($_POST['add_event'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uredi događaj</title>
+  <title>SUPU</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/navBar.css">
   <link rel="stylesheet" href="css/index.css">
+
+  <script>
+    $(document).ready(function() {
+      $('#promo_discount').attr('disabled', true);
+      $('#promo_code').keyup(function() {
+        if ($(this).val().length != 0)
+          $('#promo_discount').attr('disabled', false);
+        else
+          $('#promo_discount').attr('disabled', true);
+      })
+    });
+  </script>
+
 </head>
 
 <body>
@@ -60,6 +75,16 @@ if (isset($_POST['add_event'])) {
       <div class="form-group">
         <label for="title">Naziv događaja</label>
         <input type="text" class="form-control" id="title" placeholder="Unesi naziv događaja" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Kategorija</label>
+        <select id="category" name="category" style="width: 100%; height: 35px">
+          <option value="Glazba">Glazba</option>
+          <option value="Film">Film</option>
+          <option value="Kazalište">Kazalište</option>
+          <option value="Sport">Sport</option>
+          <option value="Turizam">Turizam</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="performer">Izvođač</label>
@@ -111,7 +136,7 @@ if (isset($_POST['add_event'])) {
       <button type="submit" name="add_event" class="btn btn-primary">Add</button>
     </form>
   </div>
+
 </body>
 
 </html>
-

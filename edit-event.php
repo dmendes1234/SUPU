@@ -6,6 +6,7 @@ error_reporting(0);
 if (isset($_POST['submit'])) {
   $event_id = $_GET['editid'];
   $title = $_POST['title'];
+  $category = $_POST['category'];
   $performer = $_POST['performer'];
   $organizer = $_POST['organizer'];
   $location = $_POST['location'];
@@ -17,7 +18,13 @@ if (isset($_POST['submit'])) {
   $promo_code = $_POST['promo_code'];
   $promo_discount = $_POST['promo_discount'];
 
-  $query = mysqli_query($con, "update events set Title='$title', Performer='$performer', Organizer='$organizer', Location='$location', Image='$image', Date='$date', TicketPriceChild='$cprice', TicketPriceAdult='$aprice', AvailableSeats='$seats', PromoCode='$promo_code', PromoDiscount='$promo_discount' where ID='$event_id'");
+  if (isset($_POST['recommend_event'])) {
+    $recommended = 1;
+  } else {
+    $recommended = 0;
+  }
+
+  $query = mysqli_query($con, "update events set Title='$title', Category='$category', Performer='$performer', Organizer='$organizer', Location='$location', Image='$image', Date='$date', TicketPriceChild='$cprice', TicketPriceAdult='$aprice', AvailableSeats='$seats', PromoCode='$promo_code', PromoDiscount='$promo_discount', Recommended='$recommended' where ID='$event_id'");
   if ($query) {
     echo '<script>
       alert("Podaci uspješno izmijenjeni");
@@ -67,49 +74,65 @@ if (isset($_POST['submit'])) {
       ?>
       <h4>Informacije o događaju</h4>
       <div class="form-group">
-        <label for="title">Naziv događaja</label>
-        <input type="text" class="form-control" id="title" placeholder="Unesi naziv događaja" name="title" value="<?php echo $row['Title'] ?>">
+        <label for="title_edit">Naziv događaja</label>
+        <input type="text" class="form-control" id="title_edit" placeholder="Unesi naziv događaja" name="title" value="<?php echo $row['Title'] ?>">
       </div>
       <div class="form-group">
-        <label for="performer">Izvođač</label>
-        <input type="text" class="form-control" id="performer" placeholder="Unesi naziv izvođača" name="performer" value="<?php echo $row['Performer'] ?>">
+        <label for="category_edit">Kategorija</label>
+        <select id="category_edit" name="category" style="width: 100%; height: 35px">
+          <option value="Glazba">Glazba</option>
+          <option value="Film">Film</option>
+          <option value="Kazalište">Kazališze</option>
+          <option value="Sport">Sport</option>
+          <option value="Turizam">Turizam</option>
+        </select>
       </div>
       <div class="form-group">
-        <label for="organizer">Organizator</label>
-        <input type="text" class="form-control" id="organizer" placeholder="Unesi naziv organizatora" name="organizer" value="<?php echo $row['Organizer'] ?>">
+        <label for="performer_edit">Izvođač</label>
+        <input type="text" class="form-control" id="performer_edit" placeholder="Unesi naziv izvođača" name="performer" value="<?php echo $row['Performer'] ?>">
       </div>
       <div class="form-group">
-        <label for="location">Mjesto izvođenja događaja</label>
-        <input class="form-control" id="location" placeholder="Unesi lokaciju događaja" name="location" value="<?php echo $row['Location'] ?>">
+        <label for="organizer_edit">Organizator</label>
+        <input type="text" class="form-control" id="organizer_edit" placeholder="Unesi naziv organizatora" name="organizer" value="<?php echo $row['Organizer'] ?>">
       </div>
       <div class="form-group">
-        <label for="image">Fotografija događaja</label>
-        <input type="text" class="form-control" id="image" placeholder="Unesi url fotografije" name="image" value="<?php echo $row['Image'] ?>">
+        <label for="location_edit">Mjesto izvođenja događaja</label>
+        <input class="form-control" id="location_edit" placeholder="Unesi lokaciju događaja" name="location" value="<?php echo $row['Location'] ?>">
       </div>
       <div class="form-group">
-        <label for="date">Datum i vrijeme događanja</label>
-        <input type="datetime-local" class="form-control" id="date" placeholder="Unesi datum događaja" name="date" value="<?php echo $row['Date'] ?>">
+        <label for="image_edit">Fotografija događaja</label>
+        <input type="text" class="form-control" id="image_edit" placeholder="Unesi url fotografije" name="image" value="<?php echo $row['Image'] ?>">
       </div>
       <div class="form-group">
-        <label for="cprice">Cijena ulaznice za djecu</label>
-        <input type="number" class="form-control" id="cprice" placeholder="Unesi cijenu ulaznice za djecu" name="cprice" value="<?php echo $row['TicketPriceChild'] ?>">
+        <label for="date_edit">Datum i vrijeme događanja</label>
+        <input type="datetime-local" class="form-control" id="date_edit" placeholder="Unesi datum događaja" name="date" value="<?php echo $row['Date'] ?>">
       </div>
       <div class="form-group">
-        <label for="aprice">Cijena ulaznice za odrasle</label>
-        <input type="number" class="form-control" id="aprice" placeholder="Unesi cijenu ulaznice za odrasle" name="aprice" value="<?php echo $row['TicketPriceAdult'] ?>">
+        <label for="cprice_edit">Cijena ulaznice za djecu</label>
+        <input type="number" class="form-control" id="cprice_edit" placeholder="Unesi cijenu ulaznice za djecu" name="cprice" value="<?php echo $row['TicketPriceChild'] ?>">
       </div>
       <div class="form-group">
-        <label for="seats">Slobodna mjesta</label>
-        <input type="number" class="form-control" id="seats" placeholder="Unesi broj slobodnih mjesta" name="seats" value="<?php echo $row['AvailableSeats'] ?>">
+        <label for="aprice_edit">Cijena ulaznice za odrasle</label>
+        <input type="number" class="form-control" id="aprice_edit" placeholder="Unesi cijenu ulaznice za odrasle" name="aprice" value="<?php echo $row['TicketPriceAdult'] ?>">
       </div>
       <div class="form-group">
-        <label for="promo_code">Promo code</label>
-        <input type="text" class="form-control" id="promo_code" placeholder="Unesi kod za popust ukoliko postoji" name="promo_code" value="<?php echo $row['PromoCode'] ?>">
+        <label for="seats_edit">Slobodna mjesta</label>
+        <input type="number" class="form-control" id="seats_edit" placeholder="Unesi broj slobodnih mjesta" name="seats" value="<?php echo $row['AvailableSeats'] ?>">
       </div>
       <div class="form-group">
-        <label for="promo_discount">Promo popust</label>
-        <input type="number" class="form-control" id="promo_discount" placeholder="Unesi popust (%) koji se ostvaruje unosom promo koda" name="promo_discount" value="<?php echo $row['PromoDiscount'] ?>">
+        <label for="promo_code_edit">Promo code</label>
+        <input type="text" class="form-control" id="promo_code_edit" placeholder="Unesi kod za popust ukoliko postoji" name="promo_code" value="<?php echo $row['PromoCode'] ?>">
       </div>
+      <div class="form-group">
+        <label for="promo_discount_edit">Promo popust</label>
+        <input type="number" class="form-control" id="promo_discount_edit" placeholder="Unesi popust (%) koji se ostvaruje unosom promo koda" name="promo_discount" value="<?php echo $row['PromoDiscount'] ?>">
+      </div>
+      <hr>
+      <div class="form-group" style="margin-left: 20px;">
+        <input type="checkbox" class="form-check-input" id="recommend_event_edit" name="recommend_event" <?php if ($row['Recommended'] == 1) echo 'checked' ?>>
+        <label class="form-check-label" for="recommend_event">Preporuči ovaj događaj</label>
+      </div>
+      <hr>
 
       <button type="submit" name="submit" class="btn btn-primary">Update</button>
     </form>
