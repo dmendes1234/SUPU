@@ -15,7 +15,14 @@ if (isset($_POST['add_event'])) {
     $promo_code = $_POST['promo_code'];
     $promo_discount = $_POST['promo_discount'];
 
-    $query = mysqli_query($con, 'insert into events (Title, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats, PromoCode, PromoDiscount) values ("' . $title . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '", "' . $promo_code . '", "' . $promo_discount . '")');
+    if(isset($_POST['recommend_event'])){
+      $recommended = 1;
+    }
+    else{
+      $recommended = 0;
+    }
+
+    $query = mysqli_query($con, 'insert into events (Title, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats, PromoCode, PromoDiscount, Recommended) values ("' . $title . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '", "' . $promo_code . '", "' . $promo_discount . '", "' . $recommended . '")');
     $_SESSION['msg'] = "Događaj uspješno kreiran.";
     header('location:index.php');
 }
@@ -94,6 +101,12 @@ if (isset($_POST['add_event'])) {
         <label for="promo_discount">Promo popust</label>
         <input type="number" class="form-control" id="promo_discount" placeholder="Unesi popust (%) koji se ostvaruje unosom promo koda" name="promo_discount">
       </div>
+      <hr>
+      <div class="form-group" style="margin-left: 20px;">
+        <input type="checkbox" class="form-check-input" id="recommend_event" name="recommend_event">
+        <label class="form-check-label" for="recommend_event">Preporuči ovaj događaj</label>
+      </div>
+      <hr>
 
       <button type="submit" name="add_event" class="btn btn-primary">Add</button>
     </form>

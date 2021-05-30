@@ -30,9 +30,12 @@ include('includes/dbconnection.php');
     include("includes/navBar.php");
     ?>
 
+    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;"> 
+        <a href="index.php"><-- Nazad na preporučene događaje</a>
+    </div>
+
     <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
-        <a href="all-events.php" style="float:right; font-size:23px">Svi događaji -></a>
-        <h4>Preporučeni događaji:</h4>
+        <h4>Svi događaji:</h4>
     </div>
 
     <!-- Kartica događaja -->
@@ -123,7 +126,7 @@ include('includes/dbconnection.php');
     <?php
     $ret2 = mysqli_query($con, "select * from users where ID='$user_id'");
     $row2 = mysqli_fetch_array($ret2);
-    $ret = mysqli_query($con, "select * from events where Recommended='1'");
+    $ret = mysqli_query($con, "select * from events");
     while ($row = mysqli_fetch_array($ret)) {
     ?>
         <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
