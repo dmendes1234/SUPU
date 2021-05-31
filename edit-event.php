@@ -3,8 +3,9 @@ session_start();
 include('includes/dbconnection.php');
 error_reporting(0);
 
+$event_id = $_GET['editid'];
+
 if (isset($_POST['submit'])) {
-  $event_id = $_GET['editid'];
   $title = $_POST['title'];
   $category = $_POST['category'];
   $performer = $_POST['performer'];
@@ -50,9 +51,23 @@ if (isset($_POST['submit'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/navBar.css">
   <link rel="stylesheet" href="css/index.css">
+
+  <script>
+    $(document).ready(function() {
+      $('#promo_discount_edit').attr('disabled', true);
+      $('#promo_code_edit').keyup(function() {
+        if ($(this).val().length != 0)
+          $('#promo_discount_edit').attr('disabled', false);
+        else
+          $('#promo_discount_edit').attr('disabled', true);
+      })
+    });
+  </script>
 </head>
 
 <body>

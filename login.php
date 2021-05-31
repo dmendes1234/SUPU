@@ -15,11 +15,21 @@ if (isset($_POST['login'])) {
     $password = md5($_POST['password']);
     $query = mysqli_query($con, "select ID from users where UserName='$username' && Password='$password'");
     $ret = mysqli_fetch_array($query);
+    $user_id = $ret['ID'];
+    $query2 = mysqli_query($con, "select * from users where ID='$user_id'");
+    $ret2 = mysqli_fetch_array($query2);
     if ($ret > 0) {
         $_SESSION['user_id'] = $ret['ID'];
-        $_SESSION['user_type'] = $ret['UserType'];
+        $_SESSION['user_type'] = $ret2['UserType'];
         $_SESSION['username'] = $username;
-        header('location:index.php');
+        
+        if($ret2['UserType'] == 'admin') {
+            header('location:all-events.php');
+        }
+        else {
+            header('location:index.php');
+        }
+
     } else {
         echo '<script>alert("Pogrešno korisničko ime ili lozinka!")</script>';
     }

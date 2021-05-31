@@ -30,121 +30,33 @@ include('includes/dbconnection.php');
     include("includes/navBar.php");
     ?>
 
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;"> 
-        <a href="index.php"><-- Preporučeni događaji</a>
-    </div>
-
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
+    <div style="margin-top:30px; margin-left: 80px; margin-right:80px;">
         <h4>Svi događaji:</h4>
-    </div>
-
-    <!-- Kartica događaja -->
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
-    </div>
-
-    <div class="card">
-        <img src="http://www.aal-europe.eu/wp-content/uploads/2013/04/events_medium.jpg" alt="Error" style="width:100%">
-        <h1>Naziv događaja</h1>
-        <p class="event_title">Datum i vrijeme</p>
-        <p>Lokacija/mjesto događanja</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
-        <p><button>Rezerviraj ulaznicu</button></p>
+        <hr>
     </div>
 
     <?php
-    $ret2 = mysqli_query($con, "select * from users where ID='$user_id'");
-    $row2 = mysqli_fetch_array($ret2);
-    $ret = mysqli_query($con, "select * from events");
+    $ret = mysqli_query($con, "select * from events where Recommended='1'");
     while ($row = mysqli_fetch_array($ret)) {
     ?>
-        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
-            <div class="card">
-                <img src="<?php echo $row['Image']; ?>" alt="Error" style="width:100%">
-                <h1><?php echo $row['Title']; ?></h1>
-                <p class="event_title"><?php echo $row['Date']; ?></p>
-                <p><?php echo $row['Location']; ?></p>
-                <?php if ($row2['UserType'] == 'admin') { ?>
-                    <hr>
-                    <p><a href="edit-event.php?editid=<?php echo $row['ID']; ?>">Uredi</a></p>
-                    <hr>
-                    <p><a href="delete-event.php?editid=<?php echo $row['ID']; ?>">Obriši</a></p>
-                <?php } ?>
-            </div>
-        </a>
+
+    <div class="event_card">
+        <img src="<?php echo $row['Image']; ?>" alt="error">
+        <h6 class="event_title"><?php echo $row['Title']; ?></h6>
+        <p class="event_date_location">
+            <?php echo $row['Location']; ?>
+            <br>
+            <span><?php echo $row['Date']; ?></span>
+        </p>
+        <?php if ($_SESSION['user_type'] != 'admin') { ?>
+        <a href="buy_tickets.php?eventid=<?php echo $row['ID']; ?>" class="buy-ticket_link">KUPI ULAZNICE</a>
+        <?php } else { ?>
+        <a href="edit-event.php?editid=<?php echo $row['ID']; ?>" class="edit-ticket_link">UREDI</a>
+        <a href="delete-event.php?editid=<?php echo $row['ID']; ?>" class="delete-ticket_link">OBRIŠI</a>
+        <?php } ?>
+    </div>
     <?php
-    }
+    } 
     ?>
 
 </body>

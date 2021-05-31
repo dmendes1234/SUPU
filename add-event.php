@@ -24,7 +24,7 @@ if (isset($_POST['add_event'])) {
 
   $query = mysqli_query($con, 'insert into events (Title, Category, Performer, Organizer, Location, Image, Date, TicketPriceChild, TicketPriceAdult, AvailableSeats, PromoCode, PromoDiscount, Recommended) values ("' . $title . '", "' . $category . '", "' . $performer . '", "' . $organizer . '", "' . $location . '", "' . $image . '", "' . $date . '", "' . $cprice . '", "' . $aprice . '", "' . $seats . '", "' . $promo_code . '", "' . $promo_discount . '", "' . $recommended . '")');
   $_SESSION['msg'] = "Događaj uspješno kreiran.";
-  header('location:index.php');
+  header('location:all-events.php');
 }
 ?>
 
