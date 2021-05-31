@@ -34,9 +34,18 @@
     height: 50px;
 }
 
+.event_title_link {
+    color: black;
+    text-decoration: none;
+}
+
 .event_title:hover {
     cursor: pointer;
     color: rgb(158, 46, 93);
+}
+
+.event_title_link:hover {
+    text-decoration: none;
 }
 
 .event_date_location {

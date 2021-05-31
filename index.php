@@ -41,8 +41,12 @@ include('includes/dbconnection.php');
     ?>
 
     <div class="event_card">
-        <img src="<?php echo $row['Image']; ?>" alt="error">
-        <h6 class="event_title"><?php echo $row['Title']; ?></h6>
+        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
+            <img src="<?php echo $row['Image']; ?>" alt="error">
+        </a>
+        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>" class="event_title_link">
+            <h6 class="event_title"><?php echo $row['Title']; ?></h6>
+        </a>
         <p class="event_date_location">
             <?php echo $row['Location']; ?>
             <br>
