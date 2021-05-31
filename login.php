@@ -53,7 +53,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/navBar.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login&register.css">
     <title>Prijava</title>
 </head>
 
@@ -63,18 +63,25 @@ if (isset($_POST['login'])) {
     include("includes/navBar.php");
     ?>
 
-    <form id="login_form" action="#" method="post" name="login">
-        <div id="login_container">
-            <h1 id="login_title">Prijavi se</h1>
+    <div class="header">
+        <h2>Prijava</h2>
+    </div>
 
-            <label for="uname"><b>Korisničko ime</b></label>
-            <input type="text" placeholder="Enter username" name="username" required>
-
-            <label for="pwd"><b>Lozinka</b></label>
-            <input type="password" placeholder="Enter password" name="password" required>
-
-            <button type="submit" name="login">Login</button>
+    <form method="post" action="" name="login">
+        <div class="input-group">
+            <label>Korisničko ime</label>
+            <input type="text" name="username" required>
         </div>
+        <div class="input-group">
+            <label>Lozinka</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="input-group">
+            <button type="submit" class="btn" name="login">Prijavi se</button>
+        </div>
+        <p>
+            Nemaš korisnički račun? <a href="register.php">Registriraj se</a>
+        </p>
     </form>
 </body>
 

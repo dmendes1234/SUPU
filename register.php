@@ -23,7 +23,7 @@ include('register-server.php')
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/navBar.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/login&register.css">
     <title>SUPU</title>
 </head>
 
@@ -35,32 +35,32 @@ include('register-server.php')
     ?>
 
     <div class="header">
-        <h2>Register</h2>
+        <h2>Registracija</h2>
     </div>
 
     <form method="post" action="register.php">
         <?php include('errors.php'); ?>
         <div class="input-group">
-            <label>Username</label>
+            <label>Korisničko ime</label>
             <input type="text" name="username" value="<?php echo $username; ?>">
         </div>
         <div class="input-group">
-            <label>Email</label>
+            <label>E-mail</label>
             <input type="email" name="email" value="<?php echo $email; ?>">
         </div>
         <div class="input-group">
-            <label>Password</label>
+            <label>Lozinka</label>
             <input type="password" name="password_1">
         </div>
         <div class="input-group">
-            <label>Confirm password</label>
+            <label>Potvrdi lozinku</label>
             <input type="password" name="password_2">
         </div>
         <div class="input-group">
-            <button type="submit" class="btn" name="reg_user">Register</button>
+            <button type="submit" class="btn" name="reg_user">Registriraj se</button>
         </div>
         <p>
-            Already a member? <a href="login.php">Sign in</a>
+            Već imaš kreiran račun? <a href="login.php">Prijavi se</a>
         </p>
     </form>
 

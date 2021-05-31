@@ -54,7 +54,7 @@ include('includes/dbconnection.php');
         </p>
         <?php if ($_SESSION['user_type'] != 'admin') { ?>
         <a href="buy_tickets.php?eventid=<?php echo $row['ID']; ?>" class="buy-ticket_link">KUPI ULAZNICE</a>
-        <?php } else { ?>
+        <?php } else if ($_SESSION['user_type'] == 'admin') { ?>
         <a href="edit-event.php?editid=<?php echo $row['ID']; ?>" class="edit-ticket_link">UREDI</a>
         <a href="delete-event.php?editid=<?php echo $row['ID']; ?>" class="delete-ticket_link">OBRIŠI</a>
         <?php } ?>

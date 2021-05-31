@@ -5,6 +5,11 @@ include('includes/dbconnection.php');
 $event_id = $_GET['eventid'];
 $user_id = $_SESSION['user_id'];
 
+if ($user_id <= 0) {
+    $_SESSION['msg'] = 'Prijavi se kako bi mogao kupovati ulaznice';
+    header('location:login.php');
+}
+
 $get_users = mysqli_query($con, "SELECT * FROM users WHERE ID = '$user_id'");
 $row_user = mysqli_fetch_array($get_users);
 
