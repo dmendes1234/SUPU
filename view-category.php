@@ -32,9 +32,9 @@ $event_category = $_GET['event_category'];
     include("includes/navBar.php");
     ?>
 
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
-        <a href="all-events.php" style="float:right; font-size:20px">Svi događaji -></a>
-        <h4><?php echo $event_category ?></h4>
+    <div style="margin-top:30px; margin-left: 80px; margin-right:80px;">
+        <h4><?php echo $event_category ?>:</h4>
+        <hr>
     </div>
 
     <?php
@@ -58,20 +58,25 @@ $event_category = $_GET['event_category'];
     }
     while ($row = mysqli_fetch_array($ret)) {
     ?>
+    <div class="event_card">
         <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
-            <div class="card">
-                <img src="<?php echo $row['Image']; ?>" alt="Error" style="width:100%">
-                <h1><?php echo $row['Title']; ?></h1>
-                <p class="event_title"><?php echo $row['Date']; ?></p>
-                <p><?php echo $row['Location']; ?></p>
-                <?php if ($row2['UserType'] == 'admin') { ?>
-                    <hr>
-                    <p><a href="edit-event.php?editid=<?php echo $row['ID']; ?>">Uredi</a></p>
-                    <hr>
-                    <p><a href="delete-event.php?editid=<?php echo $row['ID']; ?>">Obriši</a></p>
-                <?php } ?>
-            </div>
+            <img src="<?php echo $row['Image']; ?>" alt="error">
         </a>
+        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>" class="event_title_link">
+            <h6 class="event_title"><?php echo $row['Title']; ?></h6>
+        </a>
+        <p class="event_date_location">
+            <?php echo $row['Location']; ?>
+            <br>
+            <span><?php echo $row['Date']; ?></span>
+        </p>
+        <?php if ($_SESSION['user_type'] != 'admin') { ?>
+        <a href="buy_tickets.php?eventid=<?php echo $row['ID']; ?>" class="buy-ticket_link">KUPI ULAZNICE</a>
+        <?php } else if ($_SESSION['user_type'] == 'admin') { ?>
+        <a href="edit-event.php?editid=<?php echo $row['ID']; ?>" class="edit-ticket_link">UREDI</a>
+        <a href="delete-event.php?editid=<?php echo $row['ID']; ?>" class="delete-ticket_link">OBRIŠI</a>
+        <?php } ?>
+    </div>
     <?php
     }
     ?>

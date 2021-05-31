@@ -44,7 +44,7 @@ include('includes/dbconnection.php');
         <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
             <img src="<?php echo $row['Image']; ?>" alt="error">
         </a>
-        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>">
+        <a href="event_details.php?eventid=<?php echo $row['ID']; ?>" class="event_title_link">
             <h6 class="event_title"><?php echo $row['Title']; ?></h6>
         </a>
         <p class="event_date_location">
