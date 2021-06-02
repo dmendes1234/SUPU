@@ -67,6 +67,7 @@ if (isset($_POST['buy'])) {
     <link rel="stylesheet" href="css/navBar.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/buy_tickets.css">
     <title>SUPU</title>
 </head>
 
@@ -76,31 +77,86 @@ if (isset($_POST['buy'])) {
     include("includes/navBar.php");
     ?>
 
-    <div style="margin: 50px;">
-        <a href="event_details.php?eventid=<?php echo $event_id ?>">Natrag</a>
-        <h1>Buy tickets for event with id = <?php echo $event_id ?></h1>
+    <div style="margin-top:50px; margin-bottom:50px; margin-left: 100px; margin-right:80px;">
+        <h3>Kupnja ulaznica</h3>
+        <hr>
     </div>
 
+    <div id="buy-ticket_container">
+        <button class="tablink" id="pick_tickets_tab"
+            onclick="openPage('pick_tickets', this, 'rgb(158, 46, 93)')">Odabir
+            ulaznica</button>
+        <button class="tablink" id="delivery_info_tab"
+            onclick="openPage('delivery_info', this, 'rgb(158, 46, 93)')">Podaci za dostavu</button>
+        <button class="tablink" id="confirm_order_tab"
+            onclick="openPage('confirm_order', this, 'rgb(158, 46, 93)')">Potvrda narudžbe</button>
 
-    <div class="container" style="margin-top: 30px;">
-        <h2>Naziv događaja</h2>
-        <form method="post" action="" name="buy">
-            <div class="form-group">
-                <label for="noadult">Odrasli</label>
-                <input type="number" class="form-control" id="noadult" name="noadult"
-                    placeholder="Broj ulaznica za odrasle" value="" required="true">
-            </div>
-            <div class="form-group">
-                <label for="children">Djeca</label>
-                <input type="number" class="form-control" id="nochildren" name="nochildren"
-                    placeholder="Broj ulaznica za djecu" value="">
-            </div>
-            <div class="form-group">
-                <label for="promo_code">Promo code</label>
-                <input type="text" class="form-control" name="promo_code" placeholder="Promo code (optional)">
+        <div id="pick_tickets" class="tabcontent" style="margin-top: 30px;">
+            <div class="buy-ticket_info" style="margin-bottom: 30px;">
+                <h2 style="margin-bottom: 20px;"><?php echo $row_event['Title']; ?></h2>
+                <span style="font-weight: bold;"><?php echo $row_event['Performer']; ?>, </span>
+                <span style="font-weight: bold;"><?php echo $row_event['Location']; ?>, </span>
+                <span style="font-weight: bold;"><?php echo $row_event['Date']; ?></span>
+                <br>
+                <p style="margin-top: 15px;">
+                    <span style="color: gray">ORGANIZATOR: </span> <span style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['Organizer']; ?></span>
+                    <span style="color: gray;">SLOBODNA MJESTA: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['AvailableSeats']; ?></span>
+                    <span style="color: gray;">CIJENA ULAZNICA ZA ODRASLE: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['TicketPriceAdult']; ?> kn</span>
+                    <span style="color: gray;">CIJENA ULAZNICA ZA DJECU: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['TicketPriceChild']; ?> kn</span>
+                </p>
             </div>
             <hr>
-            <h5>Podaci za dostavu</h5>
+            <h3 style="margin-top:20px; margin-bottom: 20px;">Odaberite količinu ulaznica</h3>
+            <form method="post" action="" name="buy">
+                <div class="form-group">
+                    <label for="noadult">Odrasli</label>
+                    <input type="number" class="form-control" id="noadult" name="noadult"
+                        placeholder="Broj ulaznica za odrasle" value="" required="true">
+                </div>
+                <div class="form-group">
+                    <label for="nochildren">Djeca</label>
+                    <input type="number" class="form-control" id="nochildren" name="nochildren"
+                        placeholder="Broj ulaznica za djecu" value="">
+                </div>
+                <div class="form-group">
+                    <label for="promo_code_buy">Promo kod</label>
+                    <input type="text" class="form-control" id="promo_code_buy" name="promo_code"
+                        placeholder="Ostvarite popust unosom promo koda (opcionalno)">
+                </div>
+                <a class="tablink_next"
+                    onclick="openPage('delivery_info', 'delivery_info_tab' , 'rgb(158, 46, 93)')">Sljedeće</a>
+        </div>
+
+        <div id="delivery_info" class="tabcontent">
+            <div class="buy-ticket_info" style="margin-bottom: 30px;">
+                <h2 style="margin-bottom: 20px;"><?php echo $row_event['Title']; ?></h2>
+                <span style="font-weight: bold;"><?php echo $row_event['Performer']; ?>, </span>
+                <span style="font-weight: bold;"><?php echo $row_event['Location']; ?>, </span>
+                <span style="font-weight: bold;"><?php echo $row_event['Date']; ?></span>
+                <br>
+                <p style="margin-top: 15px;">
+                    <span style="color: gray">ORGANIZATOR: </span> <span style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['Organizer']; ?></span>
+                    <span style="color: gray;">SLOBODNA MJESTA: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['AvailableSeats']; ?></span>
+                    <span style="color: gray;">CIJENA ULAZNICA ZA ODRASLE: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['TicketPriceAdult']; ?> kn</span>
+                    <span style="color: gray;">CIJENA ULAZNICA ZA DJECU: </span> <span
+                        style="padding-right:20px; font-weight:bold">
+                        <?php echo $row_event['TicketPriceChild']; ?> kn</span>
+                </p>
+            </div>
+            <hr>
+            <h3 style="margin-top:20px; margin-bottom: 20px;">Unesite podatke za dostavu</h3>
             <div class="form-group">
                 <label for="buyer_name">Ime</label>
                 <input type="text" class="form-control" id="buyer_name" name="buyer_name"
@@ -116,15 +172,49 @@ if (isset($_POST['buy'])) {
                 <input type="text" class="form-control" id="buyer_address" name="buyer_address"
                     placeholder="Unesite adresu za dostavu ulaznica" value="" required="true">
             </div>
-            <?php
+
+            <a class="tablink_back"
+                onclick="openPage('pick_tickets', 'pick_tickets_tab' , 'rgb(158, 46, 93)')">Nazad</a>
+            <a class="tablink_next"
+                onclick="openPage('confirm_order', 'confirm_order_tab' , 'rgb(158, 46, 93)')">Sljedeće</a>
+        </div>
+
+        <div id="confirm_order" class="tabcontent">
+            <a class="tablink_back"
+                onclick="openPage('delivery_info', 'delivery_info_tab' , 'rgb(158, 46, 93)')">Nazad</a>
+            <a class="tablink_next"
+                onclick="openPage('confirm_order', 'confirm_order_tab' , 'rgb(158, 46, 93)')">Potvrdi narudžbu</a>
+        </div>
+        </form>
+
+    </div>
+
+    <script>
+    function openPage(pageName, elmnt, color) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+        }
+        document.getElementById(pageName).style.display = "block";
+        document.getElementById(elmnt).style.backgroundColor = color;
+        elmnt.style.backgroundColor = color;
+    }
+
+    document.getElementById("pick_tickets_tab").click();
+    document.getElementById("pick_tickets_tab").style.backgroundColor = 'rgb(158, 46, 93)';
+    </script>
+
+    <?php
         $ret = mysqli_query($con, "SELECT * FROM events WHERE ID = '$event_id'");
         $row = mysqli_fetch_array($ret)
         ?>
-            <input type="hidden" name="cprice" value="<?php echo $row['TicketPriceChild']; ?>">
-            <input type="hidden" name="aprice" value="<?php echo $row['TicketPriceAdult']; ?>">
-
-            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4" name="buy">Kupi</button>
-        </form>
+    <input type="hidden" name="cprice" value="<?php echo $row['TicketPriceChild']; ?>">
+    <input type="hidden" name="aprice" value="<?php echo $row['TicketPriceAdult']; ?>">
     </div>
 </body>
 
