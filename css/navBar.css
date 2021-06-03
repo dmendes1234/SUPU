@@ -69,6 +69,8 @@
 .search-container {
     float: right;
     margin-top: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
 }
 
 .search-container input[type=text] {

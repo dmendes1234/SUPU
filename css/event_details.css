@@ -68,3 +68,7 @@
     width: 600px;
     height: 400px;
 }
+
+#ed_info span {
+    font-weight: bold;
+}

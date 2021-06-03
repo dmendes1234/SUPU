@@ -177,12 +177,12 @@ if (isset($_POST['buy-ticket'])) {
             <div class="form-group">
                 <label for="buyer_name">Ime</label>
                 <input type="text" class="form-control" id="buyer_name" name="buyer_name"
-                    placeholder="Unesite ime kupca">
+                    placeholder="Unesite ime kupca" value="<?php echo $row_user['Name'] ?>">
             </div>
             <div class="form-group">
                 <label for="buyer_surname">Prezime</label>
                 <input type="text" class="form-control" id="buyer_surname" name="buyer_surname"
-                    placeholder="Unesite prezime kupca">
+                    placeholder="Unesite prezime kupca" value="<?php echo $row_user['Surname'] ?>">
             </div>
             <div class="form-group">
                 <label for="buyer_address">Adresa</label>

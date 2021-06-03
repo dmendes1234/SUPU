@@ -93,12 +93,12 @@ if (isset($_POST['add_event'])) {
                 <div class="form-group">
                     <label for="performer">Izvođač</label>
                     <input type="text" class="form-control" id="performer" placeholder="Unesi naziv izvođača"
-                        name="performer" required>
+                        name="performer">
                 </div>
                 <div class="form-group">
                     <label for="organizer">Organizator</label>
                     <input type="text" class="form-control" id="organizer" placeholder="Unesi naziv organizatora"
-                        name="organizer" required>
+                        name="organizer">
                 </div>
                 <div class="form-group">
                     <label for="location">Mjesto izvođenja događaja</label>
