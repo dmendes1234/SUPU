@@ -2,6 +2,10 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+
+if(isset($_POST['search'])){
+    $event_title = $_POST['event_title_search'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +35,12 @@ include('includes/dbconnection.php');
     ?>
 
     <div style="margin-top:30px; margin-left: 80px; margin-right:80px;">
-        <h4>Svi događaji:</h4>
+        <h4>Rezultat pretraživanja za "<?php echo $event_title ?>":</h4>
         <hr>
     </div>
 
     <?php
-    $ret = mysqli_query($con, "select * from events");
+    $ret = mysqli_query($con, "select * from events where Title='$event_title'");
     while ($row = mysqli_fetch_array($ret)) {
     ?>
 
@@ -54,7 +58,7 @@ include('includes/dbconnection.php');
         </p>
         <?php if ($_SESSION['user_type'] != 'admin') { ?>
         <a href="buy_tickets.php?eventid=<?php echo $row['ID']; ?>" class="buy-ticket_link">KUPI ULAZNICE</a>
-        <?php } else { ?>
+        <?php } else if ($_SESSION['user_type'] == 'admin') { ?>
         <a href="edit-event.php?editid=<?php echo $row['ID']; ?>" class="edit-ticket_link">UREDI</a>
         <a href="delete-event.php?editid=<?php echo $row['ID']; ?>" class="delete-ticket_link">OBRIŠI</a>
         <?php } ?>
@@ -62,7 +66,6 @@ include('includes/dbconnection.php');
     <?php
     } 
     ?>
-
 </body>
 
 </html>

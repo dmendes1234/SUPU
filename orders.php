@@ -30,11 +30,12 @@ include('includes/dbconnection.php');
     include("includes/navBar.php");
     ?>
 
-    <div
-        style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white; text-align:center">
-        <h4 style="margin-bottom: 30px;">Ovo je stranica gdje su vidljive naručene ulaznice za koje se administrator
-            treba pobrinuti da budu isporučene kupcu
-        </h4>
+    <div style="margin-top:50px; margin-bottom:50px; margin-left: 100px; margin-right:80px;">
+        <h3>Narudžbe kupaca</h3>
+        <hr>
+    </div>
+
+    <div id="orders_container" style="margin-left: 80px; margin-right: 80px; background-color:white; text-align:center">
         <table class="table table-striped">
             <tr>
                 <th>#</th>

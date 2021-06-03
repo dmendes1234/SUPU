@@ -45,8 +45,12 @@ $row_user = mysqli_fetch_array($get_users);
 
 ?>
 
-    <div id="print"
-        style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
+    <div style="margin-top:50px; margin-bottom:50px; margin-left: 100px; margin-right:80px;">
+        <h3>Račun</h3>
+        <hr>
+    </div>
+
+    <div id="print" style="margin-left: 80px; margin-right: 80px; background-color:white; padding:50px">
         <h4 class="header-title" style="color: blue">Identifikacijski broj ulaznice: <?php echo $row['TicketID']; ?>
         </h4>
         <h4 class="header-title" style="color: blue">Naziv događaja: <?php echo $row['EventTitle']; ?>
@@ -80,8 +84,10 @@ $row_user = mysqli_fetch_array($get_users);
                 <td style="padding-left: 10px; color:red">$<?php echo ($ta + $tc); ?></td>
             </tr>
             <tr>
-                <th style="text-align: center;color: red;font-size: 20px; padding-left:100px" colspan="3">Cijena s popustom</th>
-                <td style="padding-left: 10px; color:red">$<?php echo (($ta + $tc) - (($row['PromoDiscount']/100)*($ta + $tc))); ?></td>
+                <th style="text-align: center;color: red;font-size: 20px; padding-left:100px" colspan="3">Cijena s
+                    popustom</th>
+                <td style="padding-left: 10px; color:red">
+                    $<?php echo (($ta + $tc) - (($row['PromoDiscount']/100)*($ta + $tc))); ?></td>
             </tr>
         </table>
         <p style="margin-top:1%; text-align:center">
@@ -89,22 +95,24 @@ $row_user = mysqli_fetch_array($get_users);
         </p>
     </div>
 
+
     <?php
 if ($row_user['UserType'] == 'admin')
 {
 ?>
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white;">
-        <h4>Podaci o kupcu</h4>
+    <div style="margin-top:20px; margin-left: 80px; margin-right:80px; padding: 25px; background-color:white;">
+        <h4 style="padding-bottom: 20px;">Podaci o kupcu</h4>
         <p>IME: <span><?php echo $row['BuyerName'] ?></span></p>
         <p>PREZIME: <span><?php echo $row['BuyerSurname'] ?></span></p>
         <p>ADRESA: <span><?php echo $row['BuyerAddress'] ?></span></p>
-        <p style="text-align: center;">STATUS NARUDŽBE: <span><?php echo $row['Status'] ?></span></p>
+        <p style="text-align: center; padding-top:20px">STATUS NARUDŽBE: <span><?php echo $row['Status'] ?></span></p>
     </div>
 
     <?php 
         if ($row['Status'] != 'Isporučeno') {
     ?>
-    <div style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white; text-align: center;">
+    <div
+        style="margin-top:20px; margin-left: 80px; margin-right:80px; padding: 25px; background-color:white; text-align: center;">
         <a href="check.php?ticketid=<?php echo $row['ID']; ?>">Označi kao isporučeno</a>
     </div>
     <?php 

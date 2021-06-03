@@ -6,12 +6,18 @@ $row = mysqli_fetch_array($ret)
 
 <div class="navigation">
     <?php if ($_SESSION['user_type'] == 'admin') { ?>
-    <a href="all-events.php">Početna</a>
+    <a href="all-events.php" class="nav-item">Početna</a>
     <a href="add-event.php" title="Add new event">Novi događaj</a>
     <a href="orders.php">Narudžbe</a>
+    <div class="search-container">
+        <form action="search-result.php" method="post" name="search">
+            <input type="text" placeholder="Traži.." name="event_title_search">
+            <button type="submit" name="search">Traži</button>
+        </form>
+    </div>
     <a href="logout.php" style="float: right;">Odjava</a>
     <?php } else if ($row > 0 && $_SESSION['user_type'] != 'admin') { ?>
-    <a href="index.php">Home</a>
+    <a href="index.php">Početna</a>
     <a href="all-events.php">Svi događaji</a>
     <a href="view-category.php?event_category=Glazba">Glazba</a>
     <a href="view-category.php?event_category=Film">Film</a>
@@ -27,6 +33,12 @@ $row = mysqli_fetch_array($ret)
             <a href="logout.php">Odjava</a>
         </div>
     </div>
+    <div class="search-container">
+        <form action="search-result.php" method="post" name="search">
+            <input type="text" placeholder="Traži.." name="event_title_search">
+            <button type="submit" name="search">Traži</button>
+        </form>
+    </div>
     <?php } else { ?>
     <a href="index.php">Početna</a>
     <a href="all-events.php">Svi događaji</a>
@@ -35,6 +47,12 @@ $row = mysqli_fetch_array($ret)
     <a href="view-category.php?event_category=Kazalište">Kazalište</a>
     <a href="view-category.php?event_category=Sport">Sport</a>
     <a href="view-category.php?event_category=Turizam">Turizam</a>
+    <div class="search-container">
+        <form action="search-result.php" method="post" name="search">
+            <input type="text" placeholder="Traži.." name="event_title_search">
+            <button type="submit" name="search">Traži</button>
+        </form>
+    </div>
     <a href="register.php" style="float: right;">Registracija</a>
     <a href="login.php" style="float:right">Prijava</a>
     <?php } ?>

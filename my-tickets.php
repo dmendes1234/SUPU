@@ -30,8 +30,12 @@ include('includes/dbconnection.php');
     include("includes/navBar.php");
     ?>
 
-    <div
-        style="margin-top:20px; margin-left: 50px; margin-right:40px; padding: 25px; background-color:white; text-align:center">
+    <div style="margin-top:50px; margin-bottom:50px; margin-left: 100px; margin-right:80px;">
+        <h3>Moje ulaznice</h3>
+        <hr>
+    </div>
+
+    <div id="my_tickets_container" style="margin-left: 80px; margin-right: 80px; background-color:white; text-align:center">
 
         <table class="table table-striped">
             <tr>
@@ -47,7 +51,7 @@ include('includes/dbconnection.php');
                 $row_user = mysqli_fetch_array($get_users);
                 $logged_user = $row_user['UserName']; 
                 
-                $ret = mysqli_query($con, "select * from tickets where User='$logged_user'");
+                $ret = mysqli_query($con, "select * from tickets where User='$logged_user' order by PostingDate DESC;");
                 $cnt = 1;
                 while ($row = mysqli_fetch_array($ret)) {
                 ?>

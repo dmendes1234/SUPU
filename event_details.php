@@ -22,7 +22,6 @@ $event_id = $_GET['eventid'];
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/navBar.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/card.css">
     <link rel="stylesheet" href="css/event_details.css">
 
     <title>SUPU</title>
@@ -38,8 +37,14 @@ $event_id = $_GET['eventid'];
     $availableSeats = $row['AvailableSeats']; 
     ?>
 
-    <div id="ed_container">
-        <h1><?php echo $row['Title'] ?></h1>
+    <div style="margin-top:50px; margin-bottom:50px; margin-left: 100px; margin-right:80px;">
+        <h3>Detalji događaja</h3>
+        <hr>
+    </div>
+
+    <div id="event_details_container" style="margin-left: 80px; margin-right: 80px; background-color:white; padding:50px">
+        <img id="event_details_image" src="<?php echo $row['Image']; ?>" alt="" style="float:right; border-radius:10px; box-shadow: 0 4px 8px 0 rgba(158, 46, 93, 0.2);">
+        <h1 style="margin-bottom: 25px;"><?php echo $row['Title'] ?></h1>
         <div id="ed_info">
             <p>IZVOĐAČ: <span><?php echo $row['Performer'] ?></span></p>
             <p>ORGANIZATOR: <span><?php echo $row['Organizer'] ?></span></p>
@@ -52,8 +57,11 @@ $event_id = $_GET['eventid'];
 
         <?php if (strlen($_SESSION['user_id']) == 0) {?>
         <p><a href="login.php">Prijavi se</a> kako bi mogao kupiti ulaznice</p>
-        <?php } else if ($availableSeats > 0) {?>
-        <a href="buy_tickets.php?eventid=<?php echo $event_id ?>">Kupi ulaznice</a>
+        <?php } else if ($availableSeats > 0 && $_SESSION['user_type'] != 'admin') {?>
+        <a href="buy_tickets.php?eventid=<?php echo $row['ID']; ?>" class="buy-ticket_link">KUPI ULAZNICE</a>
+        <?php } else if ($_SESSION['user_type'] == 'admin') { ?>
+        <a href="edit-event.php?editid=<?php echo $row['ID']; ?>" class="edit-ticket_link">UREDI</a>
+        <a href="delete-event.php?editid=<?php echo $row['ID']; ?>" class="delete-ticket_link">OBRIŠI</a>
         <?php } else {?>
         <p>Ulaznice su rasprodane</p>
         <?php }?>
