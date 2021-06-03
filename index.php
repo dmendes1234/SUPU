@@ -2,6 +2,13 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+
+if(isset($_SESSION['msg'])){
+    echo "<script type='text/javascript'>
+            alert('" . $_SESSION['msg'] . "');
+          </script>";
+    unset($_SESSION['msg']);
+}
 ?>
 
 <!DOCTYPE html>

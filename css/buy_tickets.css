@@ -67,6 +67,21 @@ button:disabled {
     margin-right: 20px;
 }
 
+.tablink_buy {
+    background-color: #333;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 20%;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
 .tablink_next:hover {
     color: white;
     text-decoration: none;
@@ -74,6 +89,12 @@ button:disabled {
 }
 
 .tablink_back:hover {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(158, 46, 93);
+}
+
+.tablink_buy:hover {
     color: white;
     text-decoration: none;
     background-color: rgb(158, 46, 93);
