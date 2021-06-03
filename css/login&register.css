@@ -10,7 +10,7 @@
     padding: 20px;
 }
 
-form,
+#login_form,
 .content {
     width: 30%;
     margin: 0px auto;
@@ -20,17 +20,35 @@ form,
     border-radius: 0px 0px 10px 10px;
 }
 
-.input-group {
+#register_form {
+    width: 30%;
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid rgb(158, 46, 93);
+    background: white;
+    border-radius: 0px 0px 10px 10px;
+}
+
+#edit-profile-form {
+    width: 30%;
+    margin: 0px auto;
+    padding: 20px;
+    border: 1px solid rgb(158, 46, 93);
+    background: white;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.input-group_custom {
     margin: 10px 0px 10px 0px;
 }
 
-.input-group label {
+.input-group_custom label {
     display: block;
     text-align: left;
     margin: 3px;
 }
 
-.input-group input {
+.input-group_custom input {
     height: 30px;
     width: 100%;
     padding: 5px 10px;

@@ -9,13 +9,13 @@ $row = mysqli_fetch_array($ret)
     <a href="all-events.php" class="nav-item">Početna</a>
     <a href="add-event.php" title="Add new event">Novi događaj</a>
     <a href="orders.php">Narudžbe</a>
+    <a href="logout.php" style="float: right;">Odjava</a>
     <div class="search-container">
         <form action="search-result.php" method="post" name="search">
             <input type="text" placeholder="Traži.." name="event_title_search">
             <button type="submit" name="search">Traži</button>
         </form>
     </div>
-    <a href="logout.php" style="float: right;">Odjava</a>
     <?php } else if ($row > 0 && $_SESSION['user_type'] != 'admin') { ?>
     <a href="index.php">Početna</a>
     <a href="all-events.php">Svi događaji</a>
@@ -30,6 +30,7 @@ $row = mysqli_fetch_array($ret)
         </button>
         <div class="dropdown-content1">
             <a href="my-tickets.php">Moje ulaznice</a>
+            <a href="edit-profile.php">Uredi profil</a>
             <a href="logout.php">Odjava</a>
         </div>
     </div>
@@ -47,13 +48,13 @@ $row = mysqli_fetch_array($ret)
     <a href="view-category.php?event_category=Kazalište">Kazalište</a>
     <a href="view-category.php?event_category=Sport">Sport</a>
     <a href="view-category.php?event_category=Turizam">Turizam</a>
+    <a href="register.php" style="float: right;">Registracija</a>
+    <a href="login.php" style="float:right">Prijava</a>
     <div class="search-container">
         <form action="search-result.php" method="post" name="search">
             <input type="text" placeholder="Traži.." name="event_title_search">
             <button type="submit" name="search">Traži</button>
         </form>
     </div>
-    <a href="register.php" style="float: right;">Registracija</a>
-    <a href="login.php" style="float:right">Prijava</a>
     <?php } ?>
 </div>
